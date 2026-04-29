@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerónimo Navajas | Finanzas de Empresas</title>
+  <meta name="description" content="Finanzas de empresas para tomar mejores decisiones: valuación, flujo de fondos, capital de trabajo, información de gestión y creación de valor." />
+  <style>
+    :root {
+      --azul-profundo: #212B55;
+      --celeste: #2CAED4;
+      --beige: #E0DAC6;
+      --amarillo-suave: #F1E19F;
+      --naranja: #F0681F;
+      --blanco: #ffffff;
+      --gris-claro: #f6f7fb;
+      --gris-texto: #4a4f5c;
+      --negro-suave: #151824;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--negro-suave);
+      background: var(--blanco);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(33, 43, 85, 0.08);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--azul-profundo);
+      font-size: 1.05rem;
+    }
+
+    .brand span {
+      color: var(--celeste);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      color: var(--gris-texto);
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--azul-profundo);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(44, 174, 212, 0.18), transparent 34%),
+        linear-gradient(135deg, #ffffff 0%, #f7f8fc 55%, #eef8fb 100%);
+      padding: 92px 24px 78px;
+    }
+
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(44, 174, 212, 0.12);
+      color: var(--azul-profundo);
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--celeste);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+      color: var(--azul-profundo);
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 1.18rem;
+      color: var(--gris-texto);
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--azul-profundo);
+      color: var(--blanco);
+      box-shadow: 0 14px 34px rgba(33, 43, 85, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #182142;
+    }
+
+    .btn-secondary {
+      background: var(--blanco);
+      color: var(--azul-profundo);
+      border-color: rgba(33, 43, 85, 0.16);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--celeste);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: var(--azul-profundo);
+      color: var(--blanco);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 24px 70px rgba(33, 43, 85, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(44, 174, 212, 0.28);
+    }
+
+    .hero-card h2 {
+      font-size: 1.45rem;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card p {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1rem;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--amarillo-suave);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric span {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.88rem;
+    }
+
+    section {
+      padding: 82px 24px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--azul-profundo);
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .section-heading p {
+      color: var(--gris-texto);
+      font-size: 1.07rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--blanco);
+      border: 1px solid rgba(33, 43, 85, 0.09);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 16px 45px rgba(33, 43, 85, 0.07);
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 60px rgba(33, 43, 85, 0.11);
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(44, 174, 212, 0.13);
+      color: var(--celeste);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      color: var(--azul-profundo);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      color: var(--gris-texto);
+      font-size: 0.98rem;
+    }
+
+    .about {
+      background: var(--gris-claro);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .portrait-placeholder {
+      background:
+        linear-gradient(135deg, rgba(33, 43, 85, 0.95), rgba(44, 174, 212, 0.8)),
+        url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80");
+      background-size: cover;
+      background-position: center;
+      border-radius: 30px;
+      min-height: 430px;
+      padding: 30px;
+      display: flex;
+      align-items: flex-end;
+      color: white;
+      box-shadow: 0 20px 60px rgba(33, 43, 85, 0.16);
+    }
+
+    .portrait-placeholder div {
+      max-width: 330px;
+    }
+
+    .portrait-placeholder strong {
+      display: block;
+      font-size: 1.35rem;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .portrait-placeholder span {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .about-text h2 {
+      color: var(--azul-profundo);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      color: var(--gris-texto);
+      margin-bottom: 18px;
+      font-size: 1.05rem;
+    }
+
+    .quote {
+      margin-top: 28px;
+      padding: 22px;
+      border-left: 5px solid var(--naranja);
+      background: var(--blanco);
+      border-radius: 18px;
+      color: var(--azul-profundo);
+      font-weight: 750;
+      box-shadow: 0 12px 35px rgba(33, 43, 85, 0.06);
+    }
+
+    .articles {
+      background: var(--blanco);
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .article {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(33, 43, 85, 0.09);
+      background: var(--blanco);
+      box-shadow: 0 16px 45px rgba(33, 43, 85, 0.07);
+    }
+
+    .article-top {
+      height: 10px;
+      background: linear-gradient(90deg, var(--celeste), var(--naranja));
+    }
+
+    .article-content {
+      padding: 24px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--azul-profundo);
+      background: rgba(241, 225, 159, 0.55);
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .article h3 {
+      color: var(--azul-profundo);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .article p {
+      color: var(--gris-texto);
+      font-size: 0.96rem;
+      margin-bottom: 18px;
+    }
+
+    .read-more {
+      font-weight: 800;
+      color: var(--celeste);
+      font-size: 0.95rem;
+    }
+
+    .services {
+      background: var(--azul-profundo);
+      color: var(--blanco);
+    }
+
+    .services .section-heading h2,
+    .services .section-heading p {
+      color: var(--blanco);
+    }
+
+    .services .section-heading p {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .service-item {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .service-item .check {
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--celeste);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+
+    .service-item h3 {
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+
+    .service-item p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.95rem;
+    }
+
+    .contact {
+      background:
+        radial-gradient(circle at bottom left, rgba(240, 104, 31, 0.13), transparent 28%),
+        var(--gris-claro);
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--blanco);
+      border-radius: 32px;
+      padding: 46px;
+      box-shadow: 0 22px 70px rgba(33, 43, 85, 0.1);
+      border: 1px solid rgba(33, 43, 85, 0.08);
+    }
+
+    .contact-box h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--azul-profundo);
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .contact-box p {
+      color: var(--gris-texto);
+      font-size: 1.06rem;
+      margin-bottom: 28px;
+    }
+
+    footer {
+      background: #151824;
+      color: rgba(255, 255, 255, 0.72);
+      padding: 28px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 880px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero-inner,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards,
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        padding: 30px 22px;
+      }
+
+      section {
+        padding: 62px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#">Gerónimo <span>Navajas</span></a>
+      <nav aria-label="Navegación principal">
+        <ul>
+          <li><a href="#enfoque">Enfoque</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#ideas">Ideas</a></li>
+          <li><a href="#consultoria">Consultoría</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Finanzas de empresas aplicadas</div>
+          <h1>Finanzas para decidir mejor.</h1>
+          <p>
+            Acompaño a empresas, emprendedores y equipos directivos a entender sus números,
+            proyectar escenarios y tomar decisiones orientadas a la creación de valor.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#ideas">Leer ideas</a>
+            <a class="btn btn-secondary" href="#contacto">Conversar sobre un proyecto</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumen de enfoque profesional">
+          <h2>De la teoría financiera a las decisiones reales de gestión.</h2>
+          <p>
+            Valuación, flujo de fondos, capital de trabajo, información de gestión y planificación financiera,
+            explicados con criterio práctico y foco en la toma de decisiones.
+          </p>
+          <div class="metric-grid">
+            <div class="metric">
+              <strong>01</strong>
+              <span>Valuación y creación de valor</span>
+            </div>
+            <div class="metric">
+              <strong>02</strong>
+              <span>Información de gestión</span>
+            </div>
+            <div class="metric">
+              <strong>03</strong>
+              <span>Flujo de caja y escenarios</span>
+            </div>
+            <div class="metric">
+              <strong>04</strong>
+              <span>Docencia y divulgación</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="enfoque">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Un enfoque financiero para problemas concretos.</h2>
+          <p>
+            Las finanzas no deberían quedarse en fórmulas. Bien usadas, son una forma de ordenar información,
+            comparar alternativas y decidir con mayor claridad.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">V</div>
+            <h3>Valuación y creación de valor</h3>
+            <p>
+              Entender cuánto vale una empresa, qué variables explican ese valor y qué decisiones pueden aumentarlo o destruirlo.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">F</div>
+            <h3>Flujo de fondos y capital de trabajo</h3>
+            <p>
+              Analizar cómo cobran, pagan, invierten y se financian las empresas para evitar confundir rentabilidad con caja.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">G</div>
+            <h3>Gestión basada en información</h3>
+            <p>
+              Diseñar indicadores, reportes y presupuestos que ayuden a dirigir mejor, no solo a mirar números del pasado.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="about">
+      <div class="container about-grid">
+        <div class="portrait-placeholder">
+          <div>
+            <strong>Consultoría, docencia y pensamiento financiero aplicado.</strong>
+            <span>Una mirada práctica para empresas que quieren decidir mejor.</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <h2>Sobre mí</h2>
+          <p>
+            Soy licenciado en Administración, MBA y docente de Finanzas de Empresas en Universidad ORT Uruguay.
+            Desde mi actividad profesional trabajo con empresas en procesos de análisis financiero, valuación,
+            información de gestión y profesionalización administrativa.
+          </p>
+          <p>
+            Me interesa conectar la teoría financiera con los problemas reales de las empresas: decisiones de inversión,
+            rentabilidad, crecimiento, capital de trabajo, flujo de caja y creación de valor.
+          </p>
+          <div class="quote">
+            “El valor de una empresa no está solamente en su balance: está en su capacidad esperada de generar fondos en el futuro.”
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ideas" class="articles">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Ideas para pensar mejor las finanzas de una empresa.</h2>
+          <p>
+            Artículos breves para empresarios, estudiantes y profesionales que quieren entender mejor cómo se crea valor.
+          </p>
+        </div>
+
+        <div class="article-grid">
+          <article class="article">
+            <div class="article-top"></div>
+            <div class="article-content">
+              <span class="tag">Valuación</span>
+              <h3>Por qué el patrimonio contable no muestra el valor de una empresa</h3>
+              <p>
+                El balance mira principalmente el pasado. El valor depende de la capacidad futura de generar fondos y del riesgo asociado.
+              </p>
+              <a class="read-more" href="#">Leer artículo →</a>
+            </div>
+          </article>
+
+          <article class="article">
+            <div class="article-top"></div>
+            <div class="article-content">
+              <span class="tag">Caja</span>
+              <h3>Una empresa puede ser rentable y quedarse sin caja</h3>
+              <p>
+                Vender más no siempre mejora la situación financiera. Plazos de cobro, stock y pagos pueden cambiar completamente la historia.
+              </p>
+              <a class="read-more" href="#">Leer artículo →</a>
+            </div>
+          </article>
+
+          <article class="article">
+            <div class="article-top"></div>
+            <div class="article-content">
+              <span class="tag">Gestión</span>
+              <h3>El punto de equilibrio como herramienta de dirección</h3>
+              <p>
+                Más que una fórmula de clase, el punto de equilibrio ayuda a entender estructura de costos, riesgo operativo y escala mínima.
+              </p>
+              <a class="read-more" href="#">Leer artículo →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="consultoria" class="services">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Áreas de trabajo</h2>
+          <p>
+            Procesos de análisis financiero y gestión para empresas que necesitan ordenar información, proyectar escenarios o tomar decisiones relevantes.
+          </p>
+        </div>
+
+        <div class="service-list">
+          <div class="service-item">
+            <div class="check">✓</div>
+            <div>
+              <h3>Valuación de empresas</h3>
+              <p>Estimación de valor, análisis de supuestos, escenarios y narrativa financiera.</p>
+            </div>
+          </div>
+
+          <div class="service-item">
+            <div class="check">✓</div>
+            <div>
+              <h3>Diagnóstico económico-financiero</h3>
+              <p>Lectura de rentabilidad, márgenes, estructura de costos, endeudamiento y capital de trabajo.</p>
+            </div>
+          </div>
+
+          <div class="service-item">
+            <div class="check">✓</div>
+            <div>
+              <h3>Presupuesto y flujo de caja</h3>
+              <p>Proyecciones, planificación financiera y seguimiento de obligaciones de corto plazo.</p>
+            </div>
+          </div>
+
+          <div class="service-item">
+            <div class="check">✓</div>
+            <div>
+              <h3>Información de gestión</h3>
+              <p>Diseño de reportes, indicadores y tableros para mejorar la toma de decisiones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact">
+      <div class="contact-box">
+        <h2>¿Conversamos?</h2>
+        <p>
+          Si estás pensando en valorar una empresa, ordenar información financiera o mejorar la toma de decisiones,
+          podés escribirme para explorar el caso.
+        </p>
+        <div class="actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="mailto:hola@geronimonavajas.com">Enviar email</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Gerónimo Navajas. Finanzas de empresas para decidir mejor.</span>
+      <span>Montevideo, Uruguay</span>
+    </div>
+  </footer>
+</body>
+</html>
