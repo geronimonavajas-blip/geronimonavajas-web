@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog | Gerónimo Navajas</title>
+  <meta name="description" content="Artículos sobre finanzas de empresas: valuación, flujo de fondos, capital de trabajo y creación de valor."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23212B55'/%3E%3Ctext x='11' y='74' font-family='system-ui,sans-serif' font-size='54' font-weight='900' fill='%23F0681F'%3EG%3C/text%3E%3Ctext x='53' y='74' font-family='system-ui,sans-serif' font-size='54' font-weight='900' fill='%23F0681F'%3EN%3C/text%3E%3Cline x1='8' y1='82' x2='92' y2='82' stroke='%23F1E19F' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E"/>
+  <style>
+    :root{--azul-profundo:#212B55;--celeste:#2CAED4;--amarillo-suave:#F1E19F;--naranja:#F0681F;--blanco:#ffffff;--gris-claro:#f6f7fb;--gris-texto:#4a4f5c;--negro-suave:#151824;--max-width:1120px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--negro-suave);background:var(--blanco);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(33,43,85,.08);box-shadow:0 2px 14px rgba(33,43,85,.06)}
+    .nav{max-width:var(--max-width);margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-weight:800;letter-spacing:-.03em;color:var(--azul-profundo);font-size:1.05rem}
+    .brand span{color:var(--celeste)}
+    nav ul{list-style:none;display:flex;gap:22px;color:var(--gris-texto);font-size:.92rem}
+    nav a:hover{color:var(--azul-profundo)}
+
+    .hero{background:radial-gradient(circle at top right,rgba(44,174,212,.14),transparent 34%),linear-gradient(135deg,#fff 0%,#f7f8fc 55%,#eef8fb 100%);padding:72px 24px 58px;border-bottom:1px solid rgba(33,43,85,.07)}
+    .hero-inner{max-width:var(--max-width);margin:0 auto}
+    .back{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--gris-texto);margin-bottom:20px;transition:color .15s}
+    .back:hover{color:var(--azul-profundo)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(44,174,212,.12);color:var(--azul-profundo);font-size:.84rem;font-weight:700;margin-bottom:18px}
+    .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--celeste)}
+    .hero h1{font-size:clamp(2.2rem,4vw,3.6rem);color:var(--azul-profundo);letter-spacing:-.06em;line-height:1;margin-bottom:14px}
+    .hero p{color:var(--gris-texto);font-size:1.05rem;max-width:580px}
+
+    .blog-body{max-width:var(--max-width);margin:0 auto;padding:52px 24px 80px}
+
+    /* Filtros por categoría */
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+    .filter-pill{padding:8px 18px;border-radius:999px;border:2px solid rgba(33,43,85,.14);background:var(--blanco);color:var(--gris-texto);font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s}
+    .filter-pill:hover{border-color:var(--celeste);color:var(--azul-profundo)}
+    .filter-pill.active{background:var(--azul-profundo);color:white;border-color:var(--azul-profundo)}
+
+    /* Grid de artículos */
+    .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+
+    .article-card{background:var(--blanco);border:1px solid rgba(33,43,85,.09);border-radius:24px;overflow:hidden;box-shadow:0 16px 45px rgba(33,43,85,.07);transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column}
+    .article-card:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(33,43,85,.11);border-color:var(--celeste)}
+    .card-top{height:8px;background:linear-gradient(90deg,var(--celeste),var(--naranja))}
+    .card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+    .card-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+    .tag{display:inline-block;font-size:.75rem;font-weight:800;color:var(--azul-profundo);background:rgba(241,225,159,.55);padding:4px 10px;border-radius:999px}
+    .card-date{font-size:.78rem;color:var(--gris-texto)}
+    .card-body h2{font-size:1.15rem;color:var(--azul-profundo);letter-spacing:-.03em;line-height:1.25;margin-bottom:10px}
+    .card-body p{color:var(--gris-texto);font-size:.95rem;line-height:1.65;flex:1;margin-bottom:20px}
+    .read-link{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--celeste);font-size:.9rem;transition:gap .15s,color .15s}
+    .read-link:hover{gap:10px;color:var(--azul-profundo)}
+
+    /* Estado vacío */
+    .empty{text-align:center;padding:60px 24px;color:var(--gris-texto)}
+    .empty h3{font-size:1.2rem;color:var(--azul-profundo);margin-bottom:8px}
+
+    footer{background:#151824;color:rgba(255,255,255,.72);padding:28px 24px;margin-top:40px}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.9rem}
+
+    .fade-in{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+    .fade-in.visible{opacity:1;transform:none}
+
+    @media(max-width:700px){nav ul{display:none}.articles-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="../index.html">Gerónimo <span>Navajas</span></a>
+    <nav><ul>
+      <li><a href="../index.html#enfoque">Enfoque</a></li>
+      <li><a href="../index.html#ideas">Ideas</a></li>
+      <li><a href="../index.html#herramientas">Herramientas</a></li>
+      <li><a href="../index.html#referencias">Referencias UY</a></li>
+      <li><a href="../index.html#consultoria">Consultoría</a></li>
+      <li><a href="../index.html#contacto">Contacto</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <a class="back" href="../index.html">← Volver al inicio</a>
+    <div class="eyebrow">Finanzas aplicadas</div>
+    <h1>Blog</h1>
+    <p>Ideas, análisis y herramientas para tomar mejores decisiones financieras en empresas uruguayas.</p>
+  </div>
+</div>
+
+<div class="blog-body">
+  <div class="filters" id="filters">
+    <button class="filter-pill active" onclick="filterBy('',this)">Todos</button>
+    <button class="filter-pill" onclick="filterBy('valuacion',this)">Valuación</button>
+    <button class="filter-pill" onclick="filterBy('caja',this)">Caja y liquidez</button>
+    <button class="filter-pill" onclick="filterBy('gestion',this)">Gestión</button>
+    <button class="filter-pill" onclick="filterBy('costos',this)">Costos</button>
+    <button class="filter-pill" onclick="filterBy('estrategia',this)">Estrategia</button>
+  </div>
+
+  <div class="articles-grid" id="grid"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 Gerónimo Navajas · <a href="../index.html" style="color:rgba(255,255,255,.6)">Volver al inicio</a></span>
+    <span>Montevideo, Uruguay</span>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════
+// ARTÍCULOS — agregá cada nuevo artículo acá
+// ══════════════════════════════════════════════════
+const ARTICULOS = [
+  // EJEMPLO (descomentá cuando tengas el primer artículo listo):
+  // {
+  //   titulo: "Por qué el patrimonio contable no muestra el valor de una empresa",
+  //   resumen: "El balance mira principalmente el pasado. El valor depende de la capacidad futura de generar fondos y del riesgo asociado.",
+  //   categoria: "valuacion",
+  //   categoriaLabel: "Valuación",
+  //   fecha: "mayo 2026",
+  //   archivo: "patrimonio-vs-valor.html"
+  // },
+];
+
+let categoriaActiva = '';
+
+function filterBy(cat, btn) {
+  categoriaActiva = cat;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const filtrados = categoriaActiva
+    ? ARTICULOS.filter(a => a.categoria === categoriaActiva)
+    : ARTICULOS;
+
+  if (filtrados.length === 0) {
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1">
+        <h3>Próximamente</h3>
+        <p>El primer artículo está en camino. Volvé pronto.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtrados.map(a => `
+    <a class="article-card fade-in" href="${a.archivo}">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="tag">${a.categoriaLabel}</span>
+          <span class="card-date">${a.fecha}</span>
+        </div>
+        <h2>${a.titulo}</h2>
+        <p>${a.resumen}</p>
+        <span class="read-link">Leer artículo →</span>
+      </div>
+    </a>`).join('');
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: .08});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+}
+
+renderGrid();
+</script>
+</body>
+</html>
