@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¿Qué es la gestión financiera y para qué sirve? | Gerónimo Navajas</title>
+  <meta name="description" content="Detrás del objetivo de maximizar el valor de la empresa hay cuatro decisiones cotidianas: en qué invertir, cómo cuidar lo invertido, cómo financiarse y qué hacer con las ganancias."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23212B55'/%3E%3Ctext x='11' y='74' font-family='system-ui,sans-serif' font-size='54' font-weight='900' fill='%23F0681F'%3EG%3C/text%3E%3Ctext x='53' y='74' font-family='system-ui,sans-serif' font-size='54' font-weight='900' fill='%23F0681F'%3EN%3C/text%3E%3Cline x1='8' y1='82' x2='92' y2='82' stroke='%23F1E19F' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E"/>
+  <style>
+    :root{--azul-profundo:#212B55;--celeste:#2CAED4;--amarillo-suave:#F1E19F;--naranja:#F0681F;--blanco:#ffffff;--gris-claro:#f6f7fb;--gris-texto:#4a4f5c;--negro-suave:#151824;--max-width:1120px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--negro-suave);background:var(--blanco);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(33,43,85,.08);box-shadow:0 2px 14px rgba(33,43,85,.06)}
+    .nav{max-width:var(--max-width);margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-weight:800;letter-spacing:-.03em;color:var(--azul-profundo);font-size:1.05rem}
+    .brand span{color:var(--celeste)}
+    nav ul{list-style:none;display:flex;gap:22px;color:var(--gris-texto);font-size:.92rem}
+    nav a:hover{color:var(--azul-profundo)}
+
+    .article-hero{background:radial-gradient(circle at top right,rgba(44,174,212,.13),transparent 34%),linear-gradient(135deg,#fff 0%,#f7f8fc 55%,#eef8fb 100%);padding:64px 24px 52px;border-bottom:1px solid rgba(33,43,85,.07)}
+    .article-hero-inner{max-width:760px;margin:0 auto}
+    .back{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--gris-texto);margin-bottom:22px;transition:color .15s}
+    .back:hover{color:var(--azul-profundo)}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+    .tag{display:inline-block;font-size:.78rem;font-weight:800;color:var(--azul-profundo);background:rgba(241,225,159,.55);padding:5px 12px;border-radius:999px}
+    .article-date{font-size:.82rem;color:var(--gris-texto)}
+    .article-hero h1{font-size:clamp(1.9rem,4vw,3rem);color:var(--azul-profundo);letter-spacing:-.05em;line-height:1.08;margin-bottom:18px}
+    .article-lead{font-size:1.15rem;color:var(--gris-texto);line-height:1.65;max-width:680px}
+
+    .article-wrap{max-width:760px;margin:0 auto;padding:52px 24px 80px}
+
+    .article-body p{font-size:1.06rem;color:#2a2e3a;line-height:1.82;margin-bottom:22px}
+    .article-body h2{font-size:1.55rem;color:var(--azul-profundo);letter-spacing:-.04em;line-height:1.15;margin:44px 0 16px;padding-top:8px;border-top:2px solid rgba(33,43,85,.07)}
+    .article-body h3{font-size:1.15rem;color:var(--azul-profundo);letter-spacing:-.02em;margin:28px 0 10px;font-weight:700}
+    .article-body ul,.article-body ol{margin:0 0 22px 22px}
+    .article-body li{font-size:1.04rem;color:#2a2e3a;line-height:1.75;margin-bottom:6px}
+    .article-body strong{color:var(--azul-profundo)}
+    .article-body a{color:var(--celeste);text-decoration:underline;text-underline-offset:3px}
+    .article-body a:hover{color:var(--azul-profundo)}
+
+    .formula{background:var(--azul-profundo);color:var(--amarillo-suave);font-family:monospace;font-size:1rem;padding:16px 22px;border-radius:12px;margin:24px 0;line-height:1.6}
+
+    .pullquote{border-left:4px solid var(--naranja);background:rgba(240,104,31,.06);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;font-size:1.08rem;color:var(--azul-profundo);font-weight:600;line-height:1.55}
+
+    .nota{background:rgba(44,174,212,.08);border-left:3px solid var(--celeste);padding:14px 18px;border-radius:0 10px 10px 0;font-size:.95rem;color:var(--azul-profundo);margin:24px 0;line-height:1.6}
+
+    .divider{border:none;border-top:2px solid rgba(33,43,85,.07);margin:44px 0}
+
+    .article-footer{background:var(--gris-claro);border-top:1px solid rgba(33,43,85,.07);padding:40px 24px}
+    .article-footer-inner{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+    .author-box{display:flex;align-items:center;gap:14px}
+    .author-avatar{width:46px;height:46px;border-radius:50%;background:var(--azul-profundo);color:var(--amarillo-suave);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem;flex-shrink:0}
+    .author-name{font-weight:700;color:var(--azul-profundo);font-size:.95rem}
+    .author-role{font-size:.82rem;color:var(--gris-texto)}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:1px solid rgba(33,43,85,.16);border-radius:12px;font-weight:700;color:var(--azul-profundo);background:var(--blanco);font-size:.9rem;transition:all .15s}
+    .btn-back:hover{border-color:var(--celeste);transform:translateY(-1px)}
+
+    footer{background:#151824;color:rgba(255,255,255,.72);padding:28px 24px}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.9rem}
+
+    @media(max-width:700px){nav ul{display:none}.article-footer-inner{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="../index.html">Gerónimo <span>Navajas</span></a>
+    <nav><ul>
+      <li><a href="../index.html#enfoque">Enfoque</a></li>
+      <li><a href="index.html">Blog</a></li>
+      <li><a href="../index.html#herramientas">Herramientas</a></li>
+      <li><a href="../index.html#referencias">Referencias UY</a></li>
+      <li><a href="../index.html#consultoria">Consultoría</a></li>
+      <li><a href="../index.html#contacto">Contacto</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <a class="back" href="index.html">← Volver al blog</a>
+    <div class="article-meta">
+      <span class="tag">Gestión</span>
+      <span class="article-date">mayo 2026</span>
+    </div>
+    <h1>¿Qué es la gestión financiera y para qué sirve?</h1>
+    <p class="article-lead">Maximizar el valor de la empresa suena ambicioso. En el día a día se traduce en cuatro decisiones bien concretas: dónde invertir, cómo cuidar lo invertido, cómo financiarse y qué hacer con las ganancias.</p>
+  </div>
+</div>
+
+<div class="article-wrap">
+  <div class="article-body">
+
+    <p>La gestión financiera tiene un objetivo bastante concreto: maximizar el valor de la empresa para sus dueños. Suena ambicioso, pero en el día a día se traduce en decisiones más terrenales sobre dónde invertir, cómo administrar lo que ya tenemos, cómo financiarnos y qué hacer con las ganancias.</p>
+
+    <h2>Decidir en qué invertir</h2>
+
+    <p>Lo primero es evaluar las inversiones. Antes de poner plata en un proyecto, hay que estudiarlo: ¿genera valor?, ¿qué tan probable es que el escenario que proyectamos efectivamente se cumpla?, ¿qué pasa si las cosas no salen como esperamos?</p>
+
+    <p>Y hay una pregunta que a veces se pasa por alto: el costo de oportunidad. Hacer este proyecto significa no hacer otro. Por eso no alcanza con que el elegido dé resultados; tiene que dar mejores resultados que las alternativas con un nivel de riesgo similar.</p>
+
+    <div class="pullquote">
+      No alcanza con que el proyecto elegido dé resultados; tiene que dar mejores resultados que las alternativas con un nivel de riesgo similar.
+    </div>
+
+    <h2>Cuidar lo que ya está adentro</h2>
+
+    <p>Una vez que la inversión se hizo, el trabajo no termina. Gestionar las inversiones existentes es tan importante como elegir las nuevas, y buena parte de eso pasa por el capital de trabajo: cuentas a cobrar, inventarios, plazos con proveedores.</p>
+
+    <p>Mantener estas variables dentro de los parámetros definidos no es burocracia: es lo que evita que la empresa se quede sin liquidez. Si las cuentas a cobrar se van de rango, alguien tiene que financiar ese desfase, y ese alguien se cobra. Puede ser un banco con su tasa de interés, un proveedor al que pagamos tarde con un recargo implícito, o accionistas a los que les pedimos más capital, lo que diluye el rendimiento por acción.</p>
+
+    <h2>Definir el mix de financiamiento</h2>
+
+    <p>La gestión financiera también supone monitorear cómo financiamos la empresa: cuánto con deuda, cuánto con capital propio, en qué moneda, a qué plazo. La combinación que maximiza el valor no es la misma para todas las empresas ni para todos los momentos.</p>
+
+    <div class="nota">
+      En Uruguay este punto pesa más de lo que pesaría en otras economías. La exposición al tipo de cambio, la disponibilidad de crédito y los plazos del mercado local hacen que las decisiones de financiamiento muchas veces sean tan determinantes como las de inversión.
+    </div>
+
+    <h2>La política de dividendos</h2>
+
+    <p>Por último, qué hacemos con las ganancias. Acá hay que conciliar tres cosas que no siempre tiran para el mismo lado: lo que esperan los accionistas, lo que necesita la empresa para financiar sus próximos proyectos y lo que indican las decisiones de financiamiento que ya tomamos.</p>
+
+    <p>No hay una receta única, pero sí un norte: alinear la distribución de dividendos con la estrategia financiera global. Sin ese alineamiento, las decisiones se vuelven contradictorias y el valor que tanto buscamos termina diluyéndose en el camino.</p>
+
+  </div>
+</div>
+
+<div class="article-footer">
+  <div class="article-footer-inner">
+    <div class="author-box">
+      <div class="author-avatar">GN</div>
+      <div>
+        <div class="author-name">Gerónimo Navajas</div>
+        <div class="author-role">Docente de Finanzas · Universidad ORT Uruguay</div>
+      </div>
+    </div>
+    <a class="btn-back" href="index.html">← Ver todos los artículos</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 Gerónimo Navajas · <a href="../index.html" style="color:rgba(255,255,255,.6)">Inicio</a></span>
+    <span>Montevideo, Uruguay</span>
+  </div>
+</footer>
+
+</body>
+</html>
