@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerónimo Navajas | Finanzas de Empresas</title>
+  <meta name="description" content="Finanzas de empresas para tomar mejores decisiones: valuación, flujo de fondos, capital de trabajo, información de gestión y creación de valor." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root{--azul-profundo:#212B55;--celeste:#2CAED4;--beige:#E0DAC6;--amarillo-suave:#F1E19F;--naranja:#F0681F;--blanco:#ffffff;--gris-claro:#f6f7fb;--gris-texto:#4a4f5c;--negro-suave:#151824;--max-width:1120px;--shadow:0 2px 12px rgba(33,43,85,.10);--success:#1a6b3a;--danger:#8b1a1a}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--negro-suave);background:var(--blanco);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(33,43,85,.08);transition:box-shadow .2s}
+    header.scrolled{box-shadow:0 4px 20px rgba(33,43,85,.08)}
+    .nav{max-width:var(--max-width);margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-weight:800;letter-spacing:-.03em;color:var(--azul-profundo);font-size:1.05rem}
+    .brand span{color:var(--celeste)}
+    nav ul{list-style:none;display:flex;gap:20px;color:var(--gris-texto);font-size:.92rem}
+    nav a{transition:color .15s}
+    nav a:hover{color:var(--azul-profundo)}
+    nav a.active-link{color:var(--azul-profundo);font-weight:700}
+    .hero{background:radial-gradient(circle at top right,rgba(44,174,212,.18),transparent 34%),linear-gradient(135deg,#ffffff 0%,#f7f8fc 55%,#eef8fb 100%);padding:92px 24px 78px}
+    .hero-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(44,174,212,.12);color:var(--azul-profundo);font-size:.86rem;font-weight:700;margin-bottom:22px}
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--celeste)}
+    h1{font-size:clamp(2.4rem,5vw,4.8rem);line-height:.98;letter-spacing:-.07em;color:var(--azul-profundo);margin-bottom:24px}
+    .hero p{font-size:1.18rem;color:var(--gris-texto);max-width:650px;margin-bottom:32px}
+    .actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:14px;font-weight:800;transition:.2s ease;border:1px solid transparent}
+    .btn-primary{background:var(--azul-profundo);color:var(--blanco);box-shadow:0 14px 34px rgba(33,43,85,.22)}
+    .btn-primary:hover{transform:translateY(-2px);background:#182142}
+    .btn-secondary{background:var(--blanco);color:var(--azul-profundo);border-color:rgba(33,43,85,.16)}
+    .btn-secondary:hover{border-color:var(--celeste);transform:translateY(-2px)}
+    .hero-card{background:var(--azul-profundo);color:var(--blanco);border-radius:30px;padding:34px;box-shadow:0 24px 70px rgba(33,43,85,.28);position:relative;overflow:hidden}
+    .hero-card::after{content:"";position:absolute;right:-60px;bottom:-60px;width:190px;height:190px;border-radius:50%;background:rgba(44,174,212,.28)}
+    .hero-card h2{font-size:1.45rem;line-height:1.2;margin-bottom:18px;position:relative;z-index:1}
+    .hero-card p{color:rgba(255,255,255,.82);font-size:1rem;margin-bottom:24px;position:relative;z-index:1}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;position:relative;z-index:1}
+    .metric{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px}
+    .metric strong{display:block;font-size:1.55rem;color:var(--amarillo-suave);line-height:1;margin-bottom:8px}
+    .metric span{color:rgba(255,255,255,.75);font-size:.88rem}
+    section{padding:82px 24px}
+    .container{max-width:var(--max-width);margin:0 auto}
+    .section-heading{max-width:720px;margin-bottom:38px}
+    .section-heading h2{font-size:clamp(2rem,4vw,3rem);color:var(--azul-profundo);letter-spacing:-.05em;line-height:1.05;margin-bottom:16px}
+    .section-heading p{color:var(--gris-texto);font-size:1.07rem}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{background:var(--blanco);border:1px solid rgba(33,43,85,.09);border-radius:24px;padding:26px;box-shadow:0 16px 45px rgba(33,43,85,.07);transition:.2s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(33,43,85,.11)}
+    .icon{width:44px;height:44px;border-radius:14px;background:rgba(44,174,212,.13);color:var(--celeste);display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:20px}
+    .card h3{color:var(--azul-profundo);font-size:1.15rem;margin-bottom:10px;letter-spacing:-.02em}
+    .card p{color:var(--gris-texto);font-size:.98rem}
+    .about{background:var(--gris-claro)}
+    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px;align-items:center}
+    .portrait-placeholder{background:linear-gradient(135deg,rgba(33,43,85,.95),rgba(44,174,212,.8)),url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80");background-size:cover;background-position:center;border-radius:30px;min-height:430px;padding:30px;display:flex;align-items:flex-end;color:white;box-shadow:0 20px 60px rgba(33,43,85,.16)}
+    .portrait-placeholder div{max-width:330px}
+    .portrait-placeholder strong{display:block;font-size:1.35rem;line-height:1.15;margin-bottom:8px}
+    .portrait-placeholder span{color:rgba(255,255,255,.78)}
+    .about-text h2{color:var(--azul-profundo);font-size:clamp(2rem,4vw,3rem);letter-spacing:-.05em;line-height:1.05;margin-bottom:20px}
+    .about-text p{color:var(--gris-texto);margin-bottom:18px;font-size:1.05rem}
+    .quote{margin-top:28px;padding:22px;border-left:5px solid var(--naranja);background:var(--blanco);border-radius:18px;color:var(--azul-profundo);font-weight:750;box-shadow:0 12px 35px rgba(33,43,85,.06)}
+    .articles{background:var(--blanco)}
+    .article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .article{border-radius:24px;overflow:hidden;border:1px solid rgba(33,43,85,.09);background:var(--blanco);box-shadow:0 16px 45px rgba(33,43,85,.07);transition:border-color .2s,transform .2s,box-shadow .2s;cursor:pointer}
+    .article:hover{border-color:var(--celeste);transform:translateY(-2px);box-shadow:0 22px 60px rgba(33,43,85,.11)}
+    .article.open{border-color:var(--naranja)}
+    .article-top{height:10px;background:linear-gradient(90deg,var(--celeste),var(--naranja))}
+    .article-content{padding:24px}
+    .tag{display:inline-block;font-size:.78rem;font-weight:800;color:var(--azul-profundo);background:rgba(241,225,159,.55);padding:5px 10px;border-radius:999px;margin-bottom:14px}
+    .article h3{color:var(--azul-profundo);line-height:1.18;letter-spacing:-.03em;margin-bottom:10px}
+    .article p.preview{color:var(--gris-texto);font-size:.96rem;margin-bottom:18px}
+    .read-more{font-weight:800;color:var(--celeste);font-size:.95rem;display:inline-flex;align-items:center;gap:6px;border:none;background:none;cursor:pointer;padding:0;font-family:inherit}
+    .article.open .read-more{color:var(--naranja)}
+    .article-expand{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 24px}
+    .article.open .article-expand{max-height:500px;padding:0 24px 24px;border-top:1px solid rgba(33,43,85,.07)}
+    .expand-body{padding-top:16px}
+    .expand-body p{color:var(--gris-texto);font-size:.95rem;line-height:1.75;margin-bottom:12px}
+    .expand-body h4{color:var(--azul-profundo);font-size:.98rem;font-weight:700;margin:16px 0 6px}
+    .expand-formula{background:var(--azul-profundo);color:var(--amarillo-suave);font-family:monospace;font-size:.88rem;padding:10px 14px;border-radius:8px;margin:8px 0 12px}
+    .expand-note{background:rgba(44,174,212,.08);border-left:3px solid var(--celeste);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.92rem;color:var(--azul-profundo);margin-top:8px;line-height:1.55}
+    .herramientas{background:var(--gris-claro)}
+    .tools-tabs{display:flex;gap:4px;margin-bottom:28px;border-bottom:2px solid rgba(33,43,85,.1)}
+    .tool-tab{padding:10px 20px;font-size:.9rem;font-weight:700;color:var(--gris-texto);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;font-family:inherit;border-radius:8px 8px 0 0}
+    .tool-tab:hover{color:var(--azul-profundo);background:rgba(33,43,85,.04)}
+    .tool-tab.active{color:var(--azul-profundo);border-bottom-color:var(--celeste)}
+    .tool-panel{display:none}
+    .tool-panel.active{display:block}
+    .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+    .tool-form-card{background:var(--blanco);border:1px solid rgba(33,43,85,.09);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+    .tool-form-card h3{color:var(--azul-profundo);font-size:1.05rem;margin-bottom:4px}
+    .tool-desc{color:var(--gris-texto);font-size:.88rem;margin-bottom:18px}
+    .field{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+    .field label{font-size:.75rem;font-weight:700;color:var(--gris-texto);text-transform:uppercase;letter-spacing:.04em}
+    .field input{padding:9px 12px;border:1px solid rgba(33,43,85,.14);border-radius:10px;font-size:.95rem;font-family:inherit;color:var(--negro-suave);background:var(--blanco);transition:border-color .15s}
+    .field input:focus{outline:none;border-color:var(--celeste)}
+    .btn-calc{width:100%;padding:12px;background:var(--azul-profundo);color:white;border:none;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:6px;font-family:inherit;transition:background .15s,transform .15s}
+    .btn-calc:hover{background:#182142;transform:translateY(-1px)}
+    .tool-result-card{background:var(--blanco);border:1px solid rgba(33,43,85,.09);border-radius:20px;padding:24px;box-shadow:var(--shadow);display:none}
+    .tool-result-card.show{display:block}
+    .result-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+    .r-metric{background:rgba(33,43,85,.04);border-radius:14px;padding:14px;text-align:center}
+    .r-metric .r-val{font-size:1.35rem;font-weight:800;color:var(--azul-profundo);line-height:1;margin-bottom:5px;display:block}
+    .r-metric .r-val.pos{color:var(--success)}
+    .r-metric .r-val.neg{color:var(--danger)}
+    .r-metric .r-lbl{font-size:.75rem;color:var(--gris-texto);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+    .result-insight{background:rgba(44,174,212,.08);border-left:3px solid var(--celeste);padding:12px 16px;border-radius:0 10px 10px 0;font-size:.9rem;color:var(--azul-profundo);line-height:1.55}
+    .chart-area{background:var(--blanco);border:1px solid rgba(33,43,85,.09);border-radius:20px;padding:24px;box-shadow:var(--shadow);margin-top:20px}
+    .chart-area h4{font-size:.9rem;font-weight:700;color:var(--azul-profundo);margin-bottom:14px}
+    .chart-area canvas{max-height:240px}
+    /* ── REFERENCIAS ── */
+    .referencias{background:var(--blanco)}
+    .year-selector{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+    .year-selector-label{font-size:.78rem;font-weight:700;color:var(--gris-texto);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+    .year-pills{display:flex;gap:6px;flex-wrap:wrap}
+    .year-pill{padding:8px 20px;border-radius:999px;border:2px solid rgba(33,43,85,.14);background:var(--blanco);color:var(--gris-texto);font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s}
+    .year-pill:hover{border-color:var(--celeste);color:var(--azul-profundo)}
+    .year-pill.active{background:var(--azul-profundo);color:var(--amarillo-suave);border-color:var(--azul-profundo)}
+    .year-badge{font-size:.62rem;background:var(--naranja);color:white;padding:2px 6px;border-radius:999px;margin-left:4px;vertical-align:middle}
+    .ref-topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+    .status-bar{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--gris-texto)}
+    .sdot{width:8px;height:8px;border-radius:50%;background:#ccc;flex-shrink:0}
+    .sdot.live{background:var(--success);animation:pulse 2s infinite}
+    .sdot.local{background:var(--naranja)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    .btn-sheets{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid rgba(33,43,85,.18);border-radius:10px;font-size:.82rem;font-weight:700;color:var(--azul-profundo);background:var(--blanco);cursor:pointer;font-family:inherit;transition:all .15s}
+    .btn-sheets:hover{border-color:var(--celeste)}
+    .sheet-banner{background:var(--azul-profundo);color:white;border-radius:16px;padding:20px 24px;margin-bottom:22px;display:none}
+    .sheet-banner.show{display:block}
+    .sheet-banner h4{color:var(--amarillo-suave);font-size:.95rem;margin-bottom:6px}
+    .sheet-banner p{font-size:.84rem;color:rgba(255,255,255,.7);margin-bottom:12px;line-height:1.55}
+    .sheet-row{display:flex;gap:8px;flex-wrap:wrap}
+    .sheet-input{flex:1;min-width:190px;padding:8px 13px;border:1px solid rgba(255,255,255,.22);border-radius:10px;background:rgba(255,255,255,.1);color:white;font-size:.88rem;font-family:monospace}
+    .sheet-input::placeholder{color:rgba(255,255,255,.35)}
+    .sheet-input:focus{outline:none;border-color:var(--celeste)}
+    .btn-sh{padding:8px 16px;background:var(--celeste);color:white;border:none;border-radius:10px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit}
+    .btn-sh-close{padding:8px 13px;background:rgba(255,255,255,.12);color:white;border:none;border-radius:10px;font-size:.82rem;cursor:pointer;font-family:inherit}
+    .ref-disclaimer{background:rgba(241,225,159,.3);border-left:3px solid var(--naranja);padding:10px 16px;border-radius:0 10px 10px 0;font-size:.83rem;color:var(--azul-profundo);margin-bottom:24px;line-height:1.5}
+    .formula-box{background:var(--azul-profundo);color:var(--amarillo-suave);border-radius:16px;padding:22px 24px;margin-bottom:28px}
+    .formula-box h4{font-size:.9rem;color:white;margin-bottom:5px}
+    .formula-box p{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:14px}
+    .formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+    .f-card{background:rgba(255,255,255,.07);border-radius:10px;padding:12px 14px}
+    .f-name{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.42);margin-bottom:5px}
+    .f-eq{font-family:monospace;font-size:.88rem;color:var(--amarillo-suave);line-height:1.5}
+    .f-note{font-size:.74rem;color:rgba(255,255,255,.42);margin-top:5px}
+    .ref-controls{display:flex;gap:9px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
+    .ref-search{position:relative;flex:1;min-width:170px}
+    .ref-search input{width:100%;padding:9px 14px 9px 35px;border:1px solid rgba(33,43,85,.14);border-radius:12px;font-size:.88rem;font-family:inherit;background:var(--blanco);transition:border-color .15s}
+    .ref-search input:focus{outline:none;border-color:var(--celeste)}
+    .rs-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.38;pointer-events:none;font-size:.88rem}
+    .ref-pill{padding:8px 15px;border:1px solid rgba(33,43,85,.14);border-radius:10px;font-size:.8rem;font-weight:700;color:var(--gris-texto);background:var(--blanco);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+    .ref-pill:hover{border-color:var(--azul-profundo);color:var(--azul-profundo)}
+    .ref-pill.active{background:var(--azul-profundo);color:white;border-color:var(--azul-profundo)}
+    .cat-block{margin-bottom:34px}
+    .cat-header{display:flex;align-items:center;gap:10px;margin-bottom:13px;padding-bottom:10px;border-bottom:2px solid rgba(33,43,85,.07)}
+    .cat-icon{font-size:1.1rem}
+    .cat-title{font-size:1rem;font-weight:700;color:var(--azul-profundo);letter-spacing:-.02em}
+    .cat-count{font-size:.73rem;color:var(--gris-texto);background:var(--gris-claro);padding:3px 9px;border-radius:999px;font-weight:600}
+    .ref-table{width:100%;border-collapse:collapse}
+    .ref-table th{background:var(--gris-claro);color:var(--gris-texto);font-size:.69rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:9px 12px;text-align:left;border-bottom:2px solid rgba(33,43,85,.08)}
+    .ref-table td{padding:10px 12px;font-size:.87rem;border-bottom:1px solid rgba(33,43,85,.05);vertical-align:top}
+    .ref-table tr:last-child td{border-bottom:none}
+    .ref-table tr:hover td{background:rgba(44,174,212,.04)}
+    .val-num{font-size:1.02rem;font-weight:800;color:var(--azul-profundo);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+    .val-unit{font-size:.7rem;color:var(--gris-texto);margin-left:3px;font-weight:600}
+    .ind-name{font-weight:600;font-size:.9rem}
+    .ind-notes{font-size:.76rem;color:var(--gris-texto);margin-top:3px;line-height:1.45}
+    .src-chip{display:inline-flex;align-items:center;gap:3px;font-size:.69rem;font-weight:600;color:var(--gris-texto);background:var(--gris-claro);padding:3px 7px;border-radius:6px}
+    .date-chip{font-size:.69rem;color:var(--gris-texto)}
+    .trend{font-size:.7rem;font-weight:700;margin-left:3px}
+    .trend.up{color:var(--success)}
+    .trend.down{color:var(--danger)}
+    /* ── CONSULTORÍA ── */
+    .services{background:var(--azul-profundo);color:var(--blanco)}
+    .services .section-heading h2,.services .section-heading p{color:var(--blanco)}
+    .services .section-heading p{color:rgba(255,255,255,.78)}
+    .service-list{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .service-item{padding:20px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:background .2s,border-color .2s}
+    .service-item:hover{background:rgba(255,255,255,.13);border-color:rgba(44,174,212,.4)}
+    .service-item.open{border-color:var(--celeste);background:rgba(44,174,212,.1)}
+    .service-item .check{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:var(--celeste);display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:.85rem;transition:background .2s}
+    .service-item.open .check{background:var(--naranja)}
+    .service-item h3{font-size:1.02rem;margin-bottom:4px}
+    .service-item>div>p{color:rgba(255,255,255,.72);font-size:.95rem}
+    .service-detail{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease;opacity:0;font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.7;border-top:1px solid transparent;padding-top:0}
+    .service-item.open .service-detail{max-height:200px;opacity:1;border-top-color:rgba(255,255,255,.12);padding-top:10px;margin-top:10px}
+    /* ── CONTACTO ── */
+    .contact{background:radial-gradient(circle at bottom left,rgba(240,104,31,.13),transparent 28%),var(--gris-claro);text-align:center}
+    .contact-box{max-width:760px;margin:0 auto;background:var(--blanco);border-radius:32px;padding:46px;box-shadow:0 22px 70px rgba(33,43,85,.1);border:1px solid rgba(33,43,85,.08)}
+    .contact-box h2{font-size:clamp(2rem,4vw,3.2rem);color:var(--azul-profundo);letter-spacing:-.05em;line-height:1.05;margin-bottom:14px}
+    .contact-box p{color:var(--gris-texto);font-size:1.06rem;margin-bottom:28px}
+    footer{background:#151824;color:rgba(255,255,255,.72);padding:28px 24px}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.92rem}
+    .fade-in{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+    .fade-in.visible{opacity:1;transform:none}
+    .fade-in:nth-child(2){transition-delay:.08s}
+    .fade-in:nth-child(3){transition-delay:.16s}
+    @media(max-width:880px){nav ul{display:none}.hero-inner,.about-grid{grid-template-columns:1fr}.cards,.article-grid{grid-template-columns:1fr}.service-list,.tool-grid{grid-template-columns:1fr}.hero{padding-top:64px}.ref-table th:nth-child(4),.ref-table td:nth-child(4),.ref-table th:nth-child(5),.ref-table td:nth-child(5){display:none}}
+    @media(max-width:520px){.metric-grid,.result-metrics{grid-template-columns:1fr}.contact-box{padding:30px 22px}section{padding:62px 20px}}
+  </style>
+</head>
+<body>
+<header id="site-header">
+  <div class="nav">
+    <a class="brand" href="#">Gerónimo <span>Navajas</span></a>
+    <nav><ul>
+      <li><a href="#enfoque">Enfoque</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#ideas">Ideas</a></li>
+      <li><a href="#herramientas">Herramientas</a></li>
+      <li><a href="#referencias">Referencias UY</a></li>
+      <li><a href="#consultoria">Consultoría</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul></nav>
+  </div>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Finanzas de empresas aplicadas</div>
+      <h1>Finanzas para decidir mejor.</h1>
+      <p>Acompaño a empresas, emprendedores y equipos directivos a entender sus números, proyectar escenarios y tomar decisiones orientadas a la creación de valor.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#ideas">Leer ideas</a>
+        <a class="btn btn-secondary" href="#contacto">Conversar sobre un proyecto</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <h2>De la teoría financiera a las decisiones reales de gestión.</h2>
+      <p>Valuación, flujo de fondos, capital de trabajo, información de gestión y planificación financiera, con criterio práctico.</p>
+      <div class="metric-grid">
+        <div class="metric"><strong>01</strong><span>Valuación y creación de valor</span></div>
+        <div class="metric"><strong>02</strong><span>Información de gestión</span></div>
+        <div class="metric"><strong>03</strong><span>Flujo de caja y escenarios</span></div>
+        <div class="metric"><strong>04</strong><span>Docencia y divulgación</span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+<section id="enfoque">
+  <div class="container">
+    <div class="section-heading fade-in"><h2>Un enfoque financiero para problemas concretos.</h2><p>Las finanzas no deberían quedarse en fórmulas. Bien usadas, son una forma de ordenar información, comparar alternativas y decidir con mayor claridad.</p></div>
+    <div class="cards">
+      <article class="card fade-in"><div class="icon">V</div><h3>Valuación y creación de valor</h3><p>Entender cuánto vale una empresa, qué variables explican ese valor y qué decisiones pueden aumentarlo o destruirlo.</p></article>
+      <article class="card fade-in"><div class="icon">F</div><h3>Flujo de fondos y capital de trabajo</h3><p>Analizar cómo cobran, pagan, invierten y se financian las empresas para evitar confundir rentabilidad con caja.</p></article>
+      <article class="card fade-in"><div class="icon">G</div><h3>Gestión basada en información</h3><p>Diseñar indicadores, reportes y presupuestos que ayuden a dirigir mejor, no solo a mirar números del pasado.</p></article>
+    </div>
+  </div>
+</section>
+<section id="sobre-mi" class="about">
+  <div class="container about-grid">
+    <div class="portrait-placeholder fade-in"><div><strong>Consultoría, docencia y pensamiento financiero aplicado.</strong><span>Una mirada práctica para empresas que quieren decidir mejor.</span></div></div>
+    <div class="about-text fade-in">
+      <h2>Sobre mí</h2>
+      <p>Soy licenciado en Administración, MBA y docente de Finanzas de Empresas en Universidad ORT Uruguay. Desde mi actividad profesional trabajo con empresas en procesos de análisis financiero, valuación, información de gestión y profesionalización administrativa.</p>
+      <p>Me interesa conectar la teoría financiera con los problemas reales de las empresas: decisiones de inversión, rentabilidad, crecimiento, capital de trabajo, flujo de caja y creación de valor.</p>
+      <div class="quote">"El valor de una empresa no está solamente en su balance: está en su capacidad esperada de generar fondos en el futuro."</div>
+    </div>
+  </div>
+</section>
+<section id="ideas" class="articles">
+  <div class="container">
+    <div class="section-heading fade-in"><h2>Ideas para pensar mejor las finanzas de una empresa.</h2><p>Artículos breves para empresarios, estudiantes y profesionales. <strong>Hacé click para leer.</strong></p></div>
+    <div class="article-grid">
+      <article class="article fade-in" onclick="toggleArticle(this)">
+        <div class="article-top"></div>
+        <div class="article-content"><span class="tag">Valuación</span><h3>Por qué el patrimonio contable no muestra el valor de una empresa</h3><p class="preview">El balance mira principalmente el pasado. El valor depende de la capacidad futura de generar fondos y del riesgo asociado.</p><button class="read-more">Leer artículo →</button></div>
+        <div class="article-expand"><div class="expand-body"><p>El patrimonio contable es la diferencia entre activos y pasivos según criterios contables. La contabilidad registra lo que ya ocurrió: compras al costo histórico, depreciaciones normativas, ajustes fiscales.</p><h4>¿Qué determina el valor real?</h4><p>El valor de una empresa lo determina su capacidad de generar fondos en el futuro, descontados a una tasa que refleje el riesgo de esos flujos.</p><div class="expand-formula">Valor = Σ FCF_t / (1 + WACC)^t + Valor Terminal</div><div class="expand-note">💡 La diferencia entre el valor y el patrimonio contable refleja el valor de los intangibles y la capacidad futura de generar excedentes.</div></div></div>
+      </article>
+      <article class="article fade-in" onclick="toggleArticle(this)">
+        <div class="article-top"></div>
+        <div class="article-content"><span class="tag">Caja</span><h3>Una empresa puede ser rentable y quedarse sin caja</h3><p class="preview">Vender más no siempre mejora la situación financiera. Plazos de cobro, stock y pagos pueden cambiar completamente la historia.</p><button class="read-more">Leer artículo →</button></div>
+        <div class="article-expand"><div class="expand-body"><p>Una empresa puede mostrar utilidades contables y estar en crisis de liquidez. Ocurre cuando el crecimiento en ventas exige financiar capital de trabajo sin que llegue el cobro.</p><h4>Capital de Trabajo</h4><div class="expand-formula">CTN = Cuentas a cobrar + Inventarios − Cuentas a pagar</div><div class="expand-note">💡 Una empresa que crece rápido puede estar destruyendo caja sin saberlo. El flujo de caja operativo es tan importante como el resultado contable.</div></div></div>
+      </article>
+      <article class="article fade-in" onclick="toggleArticle(this)">
+        <div class="article-top"></div>
+        <div class="article-content"><span class="tag">Gestión</span><h3>El punto de equilibrio como herramienta de dirección</h3><p class="preview">Más que una fórmula de clase, el punto de equilibrio ayuda a entender estructura de costos, riesgo operativo y escala mínima.</p><button class="read-more">Leer artículo →</button></div>
+        <div class="article-expand"><div class="expand-body"><p>El punto de equilibrio es el nivel de ventas en el que la empresa cubre exactamente sus costos totales. Por debajo destruye valor; por encima genera utilidades.</p><div class="expand-formula">Q_eq = Costos Fijos / (Precio − Costo Variable Unitario)</div><div class="expand-note">💡 Podés calcular el punto de equilibrio de tu empresa en la sección Herramientas.</div></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+<section id="herramientas" class="herramientas">
+  <div class="container">
+    <div class="section-heading fade-in"><h2>Herramientas de análisis financiero.</h2><p>Calculadoras para explorar conceptos clave. Ingresá tus números y analizá los resultados.</p></div>
+    <div class="tools-tabs fade-in">
+      <button class="tool-tab active" onclick="switchTool('eq',this)">📊 Punto de Equilibrio</button>
+      <button class="tool-tab" onclick="switchTool('van',this)">💰 VAN / TIR</button>
+    </div>
+    <div class="tool-panel active" id="panel-eq">
+      <div class="tool-grid">
+        <div class="tool-form-card fade-in"><h3>Punto de Equilibrio</h3><p class="tool-desc">¿Cuántas unidades necesito vender para cubrir todos mis costos?</p>
+          <div class="field"><label>Precio de venta unitario ($)</label><input type="number" id="eq-precio" value="1000" oninput="calcEq()"/></div>
+          <div class="field"><label>Costo variable unitario ($)</label><input type="number" id="eq-cvu" value="400" oninput="calcEq()"/></div>
+          <div class="field"><label>Costos fijos totales ($)</label><input type="number" id="eq-cf" value="180000" oninput="calcEq()"/></div>
+          <button class="btn-calc" onclick="calcEq()">Calcular →</button>
+        </div>
+        <div class="tool-result-card" id="eq-result">
+          <div class="result-metrics">
+            <div class="r-metric"><span class="r-val" id="eq-q">—</span><span class="r-lbl">Unidades equilibrio</span></div>
+            <div class="r-metric"><span class="r-val" id="eq-ing">—</span><span class="r-lbl">Ingresos equilibrio</span></div>
+            <div class="r-metric"><span class="r-val" id="eq-mc">—</span><span class="r-lbl">Margen contribución</span></div>
+            <div class="r-metric"><span class="r-val" id="eq-aop">—</span><span class="r-lbl">Cobertura CF</span></div>
+          </div>
+          <div class="result-insight" id="eq-insight"></div>
+        </div>
+      </div>
+      <div class="chart-area fade-in" id="eq-chart-area" style="display:none"><h4>Ingresos vs. Costos Totales</h4><canvas id="eq-chart"></canvas></div>
+    </div>
+    <div class="tool-panel" id="panel-van">
+      <div class="tool-grid">
+        <div class="tool-form-card fade-in"><h3>Valuación por Flujos Descontados</h3><p class="tool-desc">Estimá el VAN y la TIR de un proyecto a 5 años.</p>
+          <div class="field"><label>Inversión inicial ($)</label><input type="number" id="van-inv" value="500000"/></div>
+          <div class="field"><label>Flujo Año 1 ($)</label><input type="number" id="van-fc1" value="120000"/></div>
+          <div class="field"><label>Flujo Año 2 ($)</label><input type="number" id="van-fc2" value="150000"/></div>
+          <div class="field"><label>Flujo Año 3 ($)</label><input type="number" id="van-fc3" value="170000"/></div>
+          <div class="field"><label>Flujo Año 4 ($)</label><input type="number" id="van-fc4" value="190000"/></div>
+          <div class="field"><label>Flujo Año 5 ($)</label><input type="number" id="van-fc5" value="200000"/></div>
+          <div class="field"><label>Tasa de descuento / WACC (%)</label><input type="number" id="van-tasa" value="12" step="0.5"/></div>
+          <button class="btn-calc" onclick="calcVAN()">Calcular →</button>
+        </div>
+        <div class="tool-result-card" id="van-result">
+          <div class="result-metrics">
+            <div class="r-metric"><span class="r-val" id="van-van">—</span><span class="r-lbl">VAN</span></div>
+            <div class="r-metric"><span class="r-val" id="van-tir">—</span><span class="r-lbl">TIR</span></div>
+            <div class="r-metric"><span class="r-val" id="van-pb">—</span><span class="r-lbl">Payback</span></div>
+            <div class="r-metric"><span class="r-val" id="van-roi">—</span><span class="r-lbl">ROI total</span></div>
+          </div>
+          <div class="result-insight" id="van-insight"></div>
+        </div>
+      </div>
+      <div class="chart-area fade-in" id="van-chart-area" style="display:none"><h4>Flujos de caja del proyecto</h4><canvas id="van-chart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     REFERENCIAS UY
+     ════════════════════════════════════════════════════════ -->
+<section id="referencias" class="referencias">
+  <div class="container">
+    <div class="section-heading fade-in">
+      <h2>Referencias para valuación en Uruguay.</h2>
+      <p>Tasas, riesgo país, betas sectoriales y variables macro. Datos históricos 2021–2025 para construir modelos financieros en contexto uruguayo.</p>
+    </div>
+
+    <!-- Selector de año -->
+    <div class="year-selector fade-in">
+      <span class="year-selector-label">Ver datos de:</span>
+      <div class="year-pills">
+        <button class="year-pill" onclick="setYear(2021,this)">2021</button>
+        <button class="year-pill" onclick="setYear(2022,this)">2022</button>
+        <button class="year-pill" onclick="setYear(2023,this)">2023</button>
+        <button class="year-pill" onclick="setYear(2024,this)">2024</button>
+        <button class="year-pill active" onclick="setYear(2025,this)">2025 <span class="year-badge">actual</span></button>
+      </div>
+    </div>
+
+    <!-- Barra de estado (solo informativa, no modificable por visitantes) -->
+    <div class="ref-topbar fade-in">
+      <div class="status-bar">
+        <div class="sdot local" id="sdot"></div>
+        <span id="stxt">Cargando datos...</span>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="ref-disclaimer fade-in">⚠️ Valores de referencia para modelado financiero. No constituyen asesoramiento de inversión. Verificá siempre en la fuente original. Fuentes: Damodaran, BCU, INE, J.P. Morgan.</div>
+
+    <!-- Fórmulas -->
+    <div class="formula-box fade-in">
+      <h4>Fórmulas clave para construir la tasa de descuento en Uruguay</h4>
+      <p>Con los datos de esta sección podés calcular el costo del equity (Ke) y el WACC para modelos en contexto uruguayo.</p>
+      <div class="formula-grid">
+        <div class="f-card"><div class="f-name">Costo del Equity — Ke</div><div class="f-eq">Ke = Rf + RP_UY + β × ERP</div><div class="f-note">Rf = T-Bond 10Y · RP_UY = EMBI · β = sector</div></div>
+        <div class="f-card"><div class="f-name">WACC</div><div class="f-eq">WACC = Ke·(E/V) + Kd·(1-t)·(D/V)</div><div class="f-note">t = IRAE 25% · Kd = tasa activa USD o UYU</div></div>
+        <div class="f-card"><div class="f-name">Beta apalancado</div><div class="f-eq">β_L = β_U × [1+(1-t)×D/E]</div><div class="f-note">Partí del beta desapalancado del sector y ajustá por estructura de capital</div></div>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="ref-controls fade-in">
+      <div class="ref-search"><span class="rs-icon">🔍</span><input type="text" placeholder="Buscar indicador..." oninput="renderRef()"/></div>
+      <button class="ref-pill active" onclick="setCat('',this)">Todos</button>
+      <button class="ref-pill" onclick="setCat('tasas',this)">Tasas</button>
+      <button class="ref-pill" onclick="setCat('riesgo',this)">Riesgo país</button>
+      <button class="ref-pill" onclick="setCat('betas',this)">Betas</button>
+      <button class="ref-pill" onclick="setCat('macro',this)">Macro</button>
+      <button class="ref-pill" onclick="setCat('bcurates',this)">BCU</button>
+    </div>
+
+    <!-- Tablas generadas por JS -->
+    <div id="ref-container" class="fade-in"></div>
+  </div>
+</section>
+
+<section id="consultoria" class="services">
+  <div class="container">
+    <div class="section-heading fade-in"><h2>Áreas de trabajo</h2><p>Procesos de análisis financiero y gestión para empresas que necesitan ordenar información, proyectar escenarios o tomar decisiones relevantes. <strong style="color:rgba(255,255,255,.9)">Hacé click para ver el detalle.</strong></p></div>
+    <div class="service-list">
+      <div class="service-item fade-in" onclick="toggleSrv(this)"><div class="check">✓</div><div style="flex:1"><h3>Valuación de empresas</h3><p>Estimación de valor, análisis de supuestos, escenarios y narrativa financiera.</p><div class="service-detail">DCF, múltiplos de mercado y análisis de sensibilidad. El objetivo no es solo un número: es entender qué variables crean o destruyen valor y cómo distintos escenarios afectan la decisión de compra, venta o inversión.</div></div></div>
+      <div class="service-item fade-in" onclick="toggleSrv(this)"><div class="check">✓</div><div style="flex:1"><h3>Diagnóstico económico-financiero</h3><p>Lectura de rentabilidad, márgenes, estructura de costos, endeudamiento y capital de trabajo.</p><div class="service-detail">Análisis horizontal y vertical, ratios clave (ROE, ROA, DuPont), ciclo de conversión de caja y nivel de apalancamiento. El diagnóstico incluye una narrativa que explica los números en el contexto del negocio.</div></div></div>
+      <div class="service-item fade-in" onclick="toggleSrv(this)"><div class="check">✓</div><div style="flex:1"><h3>Presupuesto y flujo de caja</h3><p>Proyecciones, planificación financiera y seguimiento de obligaciones de corto plazo.</p><div class="service-detail">Presupuestos integrados, modelos de proyección a 12–36 meses y seguimiento de posición de liquidez. Útil para planificar financiamiento o anticipar tensiones de caja.</div></div></div>
+      <div class="service-item fade-in" onclick="toggleSrv(this)"><div class="check">✓</div><div style="flex:1"><h3>Información de gestión</h3><p>Diseño de reportes, indicadores y tableros para mejorar la toma de decisiones.</p><div class="service-detail">Diseño de sistemas de control de gestión: tableros de KPIs, reportes mensuales, indicadores por unidad de negocio. El foco está en que la información sirva para decidir, no solo para registrar lo que ya pasó.</div></div></div>
+    </div>
+  </div>
+</section>
+<section id="contacto" class="contact">
+  <div class="contact-box fade-in">
+    <h2>¿Conversamos?</h2>
+    <p>Si estás pensando en valorar una empresa, ordenar información financiera o mejorar la toma de decisiones, podés escribirme para explorar el caso.</p>
+    <div class="actions" style="justify-content:center">
+      <a class="btn btn-primary" href="mailto:geronimonavajas@gmail.com">Enviar email</a>
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/ger%C3%B3nimo-navajas" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="footer-inner"><span>© 2026 Gerónimo Navajas. Finanzas de empresas para decidir mejor.</span><span>Montevideo, Uruguay</span></div></footer>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATOS HISTÓRICOS 2021–2025
+// ══════════════════════════════════════════════════════════
+const IND = [
+  {cat:"tasas",lbl:"Tasas de Referencia",ico:"📐",ind:"Tasa libre de riesgo (T-Bond 10Y — USA)",u:"%",src:"US Treasury / Damodaran",n:"Base del CAPM. Tasa de los bonos del Tesoro americano a 10 años. Referencia global estándar.",d:{2021:{v:1.52,a:"dic-2021"},2022:{v:3.88,a:"dic-2022"},2023:{v:3.97,a:"dic-2023"},2024:{v:4.20,a:"dic-2024"},2025:{v:4.28,a:"abr-2025"}}},
+  {cat:"tasas",lbl:"Tasas de Referencia",ico:"📐",ind:"Prima de riesgo de mercado — ERP global (Damodaran)",u:"%",src:"Damodaran",n:"Equity Risk Premium implícita del mercado americano. Base para ERP de mercados emergentes.",d:{2021:{v:4.72,a:"ene-2021"},2022:{v:5.94,a:"ene-2022"},2023:{v:5.08,a:"ene-2023"},2024:{v:4.60,a:"ene-2024"},2025:{v:4.60,a:"ene-2025"}}},
+  {cat:"tasas",lbl:"Tasas de Referencia",ico:"📐",ind:"ERP ajustado para Uruguay",u:"%",src:"ERP global + ajuste país",n:"ERP global + componente relativo del riesgo país. Estimación orientativa para modelos en contexto uruguayo.",d:{2021:{v:5.62,a:"dic-2021"},2022:{v:7.14,a:"dic-2022"},2023:{v:6.13,a:"dic-2023"},2024:{v:5.60,a:"dic-2024"},2025:{v:5.55,a:"abr-2025"}}},
+  {cat:"riesgo",lbl:"Riesgo País Uruguay",ico:"🌎",ind:"EMBI Uruguay (spread soberano)",u:"bps",src:"J.P. Morgan / ámbito.com",n:"Diferencial entre el bono soberano uruguayo y el T-Bond. Mide el riesgo adicional por invertir en Uruguay.",d:{2021:{v:90,a:"dic-2021"},2022:{v:120,a:"dic-2022"},2023:{v:105,a:"dic-2023"},2024:{v:100,a:"dic-2024"},2025:{v:95,a:"abr-2025"}}},
+  {cat:"riesgo",lbl:"Riesgo País Uruguay",ico:"🌎",ind:"EMBI Uruguay en porcentaje",u:"%",src:"J.P. Morgan",n:"Equivalente porcentual del spread. Se suma a Rf para obtener la tasa base en Uruguay.",d:{2021:{v:0.90,a:"dic-2021"},2022:{v:1.20,a:"dic-2022"},2023:{v:1.05,a:"dic-2023"},2024:{v:1.00,a:"dic-2024"},2025:{v:0.95,a:"abr-2025"}}},
+  {cat:"riesgo",lbl:"Riesgo País Uruguay",ico:"🌎",ind:"Calificación crediticia soberana (Moody's)",u:"rating",src:"Moody's",n:"Grado de inversión. Refleja solvencia y estabilidad macroeconómica.",d:{2021:{v:"Baa2",a:"2021"},2022:{v:"Baa2",a:"2022"},2023:{v:"Baa1",a:"2023"},2024:{v:"Baa1",a:"2024"},2025:{v:"Baa1",a:"2024"}}},
+  {cat:"riesgo",lbl:"Riesgo País Uruguay",ico:"🌎",ind:"Calificación crediticia soberana (S&P)",u:"rating",src:"Standard & Poor's",n:"Outlook estable. Grado de inversión.",d:{2021:{v:"BBB",a:"2021"},2022:{v:"BBB",a:"2022"},2023:{v:"BBB",a:"2023"},2024:{v:"BBB",a:"2024"},2025:{v:"BBB",a:"2024"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Agropecuario / Alimentos",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Baja ciclicidad en Uruguay. Ajustar por estructura de capital de la empresa.",d:{2021:{v:0.58,a:"ene-2021"},2022:{v:0.60,a:"ene-2022"},2023:{v:0.61,a:"ene-2023"},2024:{v:0.63,a:"ene-2024"},2025:{v:0.62,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Retail / Comercio minorista",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Sensible al ciclo económico y consumo privado.",d:{2021:{v:0.78,a:"ene-2021"},2022:{v:0.80,a:"ene-2022"},2023:{v:0.82,a:"ene-2023"},2024:{v:0.84,a:"ene-2024"},2025:{v:0.82,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Construcción e inmobiliario",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Alta sensibilidad a tasas de interés y ciclo crediticio.",d:{2021:{v:0.82,a:"ene-2021"},2022:{v:0.88,a:"ene-2022"},2023:{v:0.90,a:"ene-2023"},2024:{v:0.91,a:"ene-2024"},2025:{v:0.89,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Software / Tecnología",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Alta variabilidad en emergentes por menor liquidez.",d:{2021:{v:1.10,a:"ene-2021"},2022:{v:1.22,a:"ene-2022"},2023:{v:1.18,a:"ene-2023"},2024:{v:1.20,a:"ene-2024"},2025:{v:1.18,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Servicios financieros (no banco)",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Aseguradoras, leasing, factoring. Sensible a regulación y tasa.",d:{2021:{v:0.70,a:"ene-2021"},2022:{v:0.74,a:"ene-2022"},2023:{v:0.76,a:"ene-2023"},2024:{v:0.77,a:"ene-2024"},2025:{v:0.75,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Transporte y logística",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Carga, distribución y logística en Uruguay.",d:{2021:{v:0.76,a:"ene-2021"},2022:{v:0.79,a:"ene-2022"},2023:{v:0.81,a:"ene-2023"},2024:{v:0.82,a:"ene-2024"},2025:{v:0.80,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Salud / Servicios médicos",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Sector defensivo, baja ciclicidad. Clínicas, laboratorios, prestadores.",d:{2021:{v:0.52,a:"ene-2021"},2022:{v:0.55,a:"ene-2022"},2023:{v:0.57,a:"ene-2023"},2024:{v:0.59,a:"ene-2024"},2025:{v:0.58,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Hotelería y turismo",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Alta ciclicidad. Punta del Este, Colonia, turismo receptivo.",d:{2021:{v:0.95,a:"ene-2021"},2022:{v:1.02,a:"ene-2022"},2023:{v:1.05,a:"ene-2023"},2024:{v:1.06,a:"ene-2024"},2025:{v:1.05,a:"ene-2025"}}},
+  {cat:"betas",lbl:"Betas por Sector (Emergentes — Damodaran)",ico:"📊",ind:"Energía / Utilities",u:"β desapalancado",src:"Damodaran — Emerging Markets",n:"Sector regulado, flujos predecibles. Empresas públicas o concesionarias.",d:{2021:{v:0.40,a:"ene-2021"},2022:{v:0.44,a:"ene-2022"},2023:{v:0.46,a:"ene-2023"},2024:{v:0.47,a:"ene-2024"},2025:{v:0.45,a:"ene-2025"}}},
+  {cat:"macro",lbl:"Variables Macro — Uruguay",ico:"🇺🇾",ind:"Inflación anual (IPC)",u:"%",src:"INE Uruguay",n:"Acumulado 12 meses. Usada para proyecciones en pesos y descontar flujos nominales.",d:{2021:{v:7.96,a:"dic-2021"},2022:{v:8.97,a:"dic-2022"},2023:{v:5.11,a:"dic-2023"},2024:{v:5.08,a:"dic-2024"},2025:{v:5.10,a:"mar-2025"}}},
+  {cat:"macro",lbl:"Variables Macro — Uruguay",ico:"🇺🇾",ind:"Tipo de cambio USD/UYU (promedio anual)",u:"$/USD",src:"BCU",n:"TC de referencia. Para modelos en USD usar TC proyectado consistente con diferencial inflacionario UY-USA.",d:{2021:{v:43.72,a:"dic-2021"},2022:{v:40.16,a:"dic-2022"},2023:{v:38.66,a:"dic-2023"},2024:{v:41.45,a:"dic-2024"},2025:{v:42.80,a:"abr-2025"}}},
+  {cat:"macro",lbl:"Variables Macro — Uruguay",ico:"🇺🇾",ind:"Crecimiento PIB real",u:"%",src:"BCU / FMI",n:"Relevante para estimar la tasa de crecimiento de largo plazo (g) en el valor terminal.",d:{2021:{v:5.80,a:"2021"},2022:{v:4.90,a:"2022"},2023:{v:0.40,a:"2023"},2024:{v:3.10,a:"2024"},2025:{v:3.20,a:"est. 2025"}}},
+  {cat:"macro",lbl:"Variables Macro — Uruguay",ico:"🇺🇾",ind:"Tasa impositiva corporativa (IRAE)",u:"%",src:"DGI Uruguay",n:"Impuesto a la Renta de Actividades Económicas. Escudo fiscal: Kd × (1-t).",d:{2021:{v:25,a:"2021"},2022:{v:25,a:"2022"},2023:{v:25,a:"2023"},2024:{v:25,a:"2024"},2025:{v:25,a:"2025"}}},
+  {cat:"bcurates",lbl:"Tasas BCU — Uruguay",ico:"🏦",ind:"Tasa de política monetaria (TPM)",u:"%",src:"BCU",n:"Tasa de referencia del Banco Central. Señal de postura de política monetaria.",d:{2021:{v:7.25,a:"dic-2021"},2022:{v:11.50,a:"dic-2022"},2023:{v:9.25,a:"dic-2023"},2024:{v:8.50,a:"dic-2024"},2025:{v:8.50,a:"abr-2025"}}},
+  {cat:"bcurates",lbl:"Tasas BCU — Uruguay",ico:"🏦",ind:"Tasa activa promedio UYU (crédito empresas)",u:"%",src:"BCU — Estadísticas financieras",n:"Promedio del sistema bancario en pesos. Referencia para Kd en UYU.",d:{2021:{v:12.50,a:"dic-2021"},2022:{v:17.20,a:"dic-2022"},2023:{v:16.80,a:"dic-2023"},2024:{v:14.80,a:"dic-2024"},2025:{v:14.20,a:"mar-2025"}}},
+  {cat:"bcurates",lbl:"Tasas BCU — Uruguay",ico:"🏦",ind:"Tasa activa promedio USD (crédito empresas)",u:"%",src:"BCU — Estadísticas financieras",n:"Promedio del sistema bancario en dólares. Referencia para Kd en USD.",d:{2021:{v:3.80,a:"dic-2021"},2022:{v:5.50,a:"dic-2022"},2023:{v:7.50,a:"dic-2023"},2024:{v:7.20,a:"dic-2024"},2025:{v:6.80,a:"mar-2025"}}},
+  {cat:"bcurates",lbl:"Tasas BCU — Uruguay",ico:"🏦",ind:"Tasa pasiva promedio UYU (depósitos)",u:"%",src:"BCU — Estadísticas financieras",n:"Tasa que pagan los bancos por depósitos en pesos. Referencia de costo de fondeo.",d:{2021:{v:6.00,a:"dic-2021"},2022:{v:10.20,a:"dic-2022"},2023:{v:11.80,a:"dic-2023"},2024:{v:10.50,a:"dic-2024"},2025:{v:9.10,a:"mar-2025"}}},
+  {cat:"bcurates",lbl:"Tasas BCU — Uruguay",ico:"🏦",ind:"Rendimiento Bono Global Uruguay USD (largo plazo)",u:"%",src:"BCU / Bloomberg",n:"Yield del bono soberano en dólares. Referencia para el costo de deuda de largo plazo.",d:{2021:{v:2.50,a:"dic-2021"},2022:{v:5.20,a:"dic-2022"},2023:{v:5.60,a:"dic-2023"},2024:{v:5.30,a:"dic-2024"},2025:{v:5.15,a:"abr-2025"}}},
+];
+
+let activeYear = 2025, activeCat = '';
+
+function renderRef() {
+  const q = (document.querySelector('.ref-search input')||{value:''}).value.toLowerCase().trim();
+  const filtered = IND.filter(d => (!activeCat || d.cat===activeCat) && (!q || d.ind.toLowerCase().includes(q) || d.n.toLowerCase().includes(q) || d.src.toLowerCase().includes(q)));
+  const cats = {};
+  filtered.forEach(d => { if(!cats[d.cat]) cats[d.cat]={lbl:d.lbl,ico:d.ico,rows:[]}; cats[d.cat].rows.push(d); });
+  const c = document.getElementById('ref-container');
+  if(!Object.keys(cats).length){c.innerHTML='<p style="color:var(--gris-texto);padding:20px 0">No se encontraron resultados.</p>';return;}
+  let html='';
+  for(const[k,cat] of Object.entries(cats)){
+    html+=`<div class="cat-block"><div class="cat-header"><span class="cat-icon">${cat.ico}</span><span class="cat-title">${cat.lbl}</span><span class="cat-count">${cat.rows.length} indicadores</span></div>
+    <table class="ref-table"><thead><tr><th style="width:36%">Indicador</th><th style="width:16%;text-align:right">Valor ${activeYear}</th><th style="width:16%">Fuente</th><th style="width:10%">Período</th><th style="width:22%">Notas</th></tr></thead><tbody>`;
+    cat.rows.forEach(d=>{
+      const dato=d.d[activeYear]||{v:'—',a:'—'};
+      const prev=d.d[activeYear-1];
+      let trend='';
+      if(prev && typeof dato.v==='number' && typeof prev.v==='number'){
+        const diff=dato.v-prev.v;
+        if(Math.abs(diff)>0.001) trend=diff>0?`<span class="trend up">▲${Math.abs(diff).toFixed(2)}</span>`:`<span class="trend down">▼${Math.abs(diff).toFixed(2)}</span>`;
+      }
+      const vs=typeof dato.v==='number'?dato.v.toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2}):dato.v;
+      html+=`<tr><td><div class="ind-name">${d.ind}</div></td><td style="text-align:right"><span class="val-num">${vs}</span><span class="val-unit">${d.u}</span>${trend}</td><td><span class="src-chip">🔗 ${d.src}</span></td><td><span class="date-chip">📅 ${dato.a}</span></td><td><div class="ind-notes">${d.n}</div></td></tr>`;
+    });
+    html+='</tbody></table></div>';
+  }
+  c.innerHTML=html;
+}
+
+function setYear(yr,btn){activeYear=yr;document.querySelectorAll('.year-pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');renderRef();}
+function setCat(cat,btn){activeCat=cat;document.querySelectorAll('.ref-pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');renderRef();}
+
+// ══════════════════════════════════════════════════════════
+// GOOGLE SHEETS — conexión automática
+// ── Para actualizar datos: editá la planilla en Google Drive
+// ── Para cambiar la planilla: reemplazá el ID de abajo
+// ══════════════════════════════════════════════════════════
+// URL de tu Google Sheet publicada como CSV (Archivo → Publicar en la web → CSV)
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSMoCnY6cVJwZDKYdDWLwb9j1KF4XZsD3e7Bvbrq_M4GrgMHO_SdSE8BawrlrOL9B4q-ZtNrmt0hgVb/pub?output=csv';
+
+function parseCSVtoIND(csv) {
+  // Separa líneas y maneja comillas
+  const lines = csv.trim().split('\n');
+  const rows = lines.slice(1).map(line => {
+    const cols = [], len = line.length;
+    let cur = '', inQ = false;
+    for (let i = 0; i < len; i++) {
+      const c = line[i];
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+      else cur += c;
+    }
+    cols.push(cur.trim());
+    return cols;
+  }).filter(r => r[0] && r[4]); // filtra filas vacías
+
+  // Agrupa por indicador (col 4) y cat (col 1), construye estructura igual a IND
+  const map = {};
+  rows.forEach(r => {
+    const [anio, cat, catLabel, catIcon, indicador, valor, unidad, fuente, actualizado, notas] = r;
+    const key = cat + '||' + indicador;
+    if (!map[key]) map[key] = {cat, lbl:catLabel, ico:catIcon, ind:indicador, u:unidad, src:fuente, n:notas, d:{}};
+    const yr = parseInt(anio);
+    const v = isNaN(parseFloat(valor)) ? valor : parseFloat(valor);
+    map[key].d[yr] = {v, a: actualizado};
+  });
+  return Object.values(map);
+}
+
+function loadFromSheets() {
+  if (!SHEET_CSV_URL) {
+    // Sin Sheet configurado: usa datos locales
+    document.getElementById('sdot').className = 'sdot local';
+    document.getElementById('stxt').textContent = 'Datos de referencia locales — 2021 a 2025.';
+    renderRef();
+    return;
+  }
+  document.getElementById('stxt').textContent = 'Actualizando datos...';
+  const url = SHEET_CSV_URL;
+  fetch(url)
+    .then(r => { if (!r.ok) throw new Error('http'); return r.text(); })
+    .then(csv => {
+      const parsed = parseCSVtoIND(csv);
+      if (parsed.length > 0) {
+        // Reemplaza los datos del array global con los de Sheets
+        IND.length = 0;
+        parsed.forEach(d => IND.push(d));
+        document.getElementById('sdot').className = 'sdot live';
+        document.getElementById('stxt').textContent = 'Datos actualizados desde Google Sheets.';
+      } else throw new Error('empty');
+    })
+    .catch(() => {
+      // Falla silenciosamente: sigue mostrando datos locales
+      document.getElementById('sdot').className = 'sdot local';
+      document.getElementById('stxt').textContent = 'Datos de referencia locales — 2021 a 2025.';
+    })
+    .finally(() => renderRef());
+}
+
+// NAV
+const hdr=document.getElementById('site-header');
+const secs=document.querySelectorAll('section[id]');
+const navLs=document.querySelectorAll('nav a[href^="#"]');
+window.addEventListener('scroll',()=>{
+  hdr.classList.toggle('scrolled',window.scrollY>40);
+  let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  navLs.forEach(a=>a.classList.toggle('active-link',a.getAttribute('href')==='#'+cur));
+});
+
+// FADE IN
+const fObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>fObs.observe(el));
+
+function toggleArticle(el){const o=el.classList.contains('open');document.querySelectorAll('.article.open').forEach(a=>a.classList.remove('open'));if(!o)el.classList.add('open');}
+function toggleSrv(el){el.classList.toggle('open');}
+function switchTool(id,btn){document.querySelectorAll('.tool-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tool-tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');btn.classList.add('active');}
+
+// PUNTO DE EQUILIBRIO
+let eqCh=null;
+function calcEq(){
+  const p=parseFloat(document.getElementById('eq-precio').value)||0;
+  const cv=parseFloat(document.getElementById('eq-cvu').value)||0;
+  const cf=parseFloat(document.getElementById('eq-cf').value)||0;
+  if(p<=cv||!p){document.getElementById('eq-insight').textContent='El precio debe ser mayor al costo variable.';document.getElementById('eq-result').classList.add('show');return;}
+  const mc=p-cv,pct=(mc/p*100).toFixed(1),q=Math.ceil(cf/mc);
+  document.getElementById('eq-q').textContent=q.toLocaleString('es-UY');
+  document.getElementById('eq-ing').textContent='$'+(q*p).toLocaleString('es-UY');
+  document.getElementById('eq-mc').textContent=pct+'%';
+  document.getElementById('eq-aop').textContent=(cf/mc).toFixed(1)+' u.';
+  document.getElementById('eq-insight').textContent=pct<40?`Margen bajo (${pct}%). Necesitás ${q.toLocaleString('es-UY')} unidades para cubrir $${cf.toLocaleString('es-UY')} en costos fijos.`:`Margen sólido (${pct}%). Cada unidad sobre el equilibrio genera $${mc.toLocaleString('es-UY')} de resultado.`;
+  document.getElementById('eq-result').classList.add('show');
+  const st=12,sq=Math.ceil((q*1.9)/st),lb=[],rv=[],tc=[];
+  for(let i=0;i<=st;i++){const v=i*sq;lb.push(v.toLocaleString('es-UY'));rv.push(v*p);tc.push(cf+v*cv);}
+  document.getElementById('eq-chart-area').style.display='block';
+  if(eqCh)eqCh.destroy();
+  eqCh=new Chart(document.getElementById('eq-chart'),{type:'line',data:{labels:lb,datasets:[{label:'Ingresos',data:rv,borderColor:'#2CAED4',backgroundColor:'rgba(44,174,212,.08)',tension:.3,pointRadius:2,borderWidth:2},{label:'Costos totales',data:tc,borderColor:'#F0681F',backgroundColor:'rgba(240,104,31,.08)',tension:.3,pointRadius:2,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'top',labels:{font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString('es-UY'),font:{size:10}}},x:{title:{display:true,text:'Unidades vendidas',font:{size:11}}}}}});
+}
+
+// VAN / TIR
+let vanCh=null;
+function calcVAN(){
+  const inv=parseFloat(document.getElementById('van-inv').value)||0;
+  const t=(parseFloat(document.getElementById('van-tasa').value)||12)/100;
+  const fcs=[1,2,3,4,5].map(i=>parseFloat(document.getElementById('van-fc'+i).value)||0);
+  let van=-inv;fcs.forEach((fc,i)=>{van+=fc/Math.pow(1+t,i+1);});
+  let lo=-0.999,hi=10;
+  for(let k=0;k<200;k++){const m=(lo+hi)/2;let n=-inv;fcs.forEach((fc,i)=>{n+=fc/Math.pow(1+m,i+1);});if(n>0)lo=m;else hi=m;}
+  const tir=lo*100;
+  let cum=-inv,pb=null;
+  for(let i=0;i<fcs.length;i++){const pv=cum;cum+=fcs[i];if(cum>=0&&pb===null)pb=parseFloat((i+(-pv/fcs[i])).toFixed(1));}
+  const roi=((fcs.reduce((a,b)=>a+b,0)-inv)/inv*100).toFixed(1);
+  const ve=document.getElementById('van-van');ve.textContent=(van>=0?'+':'')+'$'+Math.round(van).toLocaleString('es-UY');ve.className='r-val '+(van>=0?'pos':'neg');
+  const te=document.getElementById('van-tir');te.textContent=tir.toFixed(1)+'%';te.className='r-val '+(tir>=t*100?'pos':'neg');
+  document.getElementById('van-pb').textContent=pb!==null?pb+' años':'> 5 años';
+  document.getElementById('van-roi').textContent=roi+'%';
+  document.getElementById('van-insight').textContent=van>=0?`VAN positivo: el proyecto agrega valor. TIR (${tir.toFixed(1)}%) supera el costo de capital (${(t*100).toFixed(1)}%). Criterio: aceptar.`:`VAN negativo: el proyecto destruye valor a esta tasa. TIR (${tir.toFixed(1)}%) no supera el costo de capital (${(t*100).toFixed(1)}%). Criterio: rechazar o replantear supuestos.`;
+  document.getElementById('van-result').classList.add('show');
+  const vs=[-inv,...fcs],cs=vs.map(v=>v>=0?'rgba(44,174,212,.8)':'rgba(240,104,31,.8)');
+  document.getElementById('van-chart-area').style.display='block';
+  if(vanCh)vanCh.destroy();
+  vanCh=new Chart(document.getElementById('van-chart'),{type:'bar',data:{labels:['Inversión','Año 1','Año 2','Año 3','Año 4','Año 5'],datasets:[{label:'Flujo ($)',data:vs,backgroundColor:cs,borderRadius:6,borderSkipped:false}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString('es-UY'),font:{size:10}}}}}});
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  calcEq(); calcVAN();
+  loadFromSheets();
+});
+</script>
+</body>
+</html>
